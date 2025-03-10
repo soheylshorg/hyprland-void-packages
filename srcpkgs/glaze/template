@@ -6,7 +6,7 @@ build_style=cmake
 configure_args=" -DBUILD_TESTING=OFF -DCMAKE_BUILD_TYPE=Release -DCMAKE_CXX_STANDARD=23"
 hostmakedepends="cmake pkg-config"
 makedepends="libsanitizer-devel"
-short_desc="A short description max 72 chars"
+short_desc="An Extremely fast, In-Memory JSON and Interface Library for Modern C++"
 maintainer="hesam-init <hesam.init@gmail.com>"
 license="GPL-3.0-or-later"
 homepage="https://github.com/stephenberry/glaze"
