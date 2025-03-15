@@ -121,10 +121,15 @@ jobs:
       - name: Retrieve private key
         run: |
           cd ~
-          curl -O https://raw.githubusercontent.com/${{ env.REPO_OWNER }}/${{ env.REPO_NAME }}/main/common/private.pem
+          curl \
+          -H 'Authorization: token $PEM_PAT' \
+          -H 'Accept: application/vnd.github.v3.raw' \
+          -O -L https://api.github.com/repos/$REPO_OWNER/hyprland-void-private-pem/contents/private.pem
+
 
       - name: Sign repository
         run: |
+          export PEM_PAT=${{ secrets.PEM_PAT }}
           export XBPS_PASSPHRASE=${{ secrets.PRIVATE_PEM_PASSPHRASE }}
           xbps-rindex --privkey ~/private.pem --sign --signedby "${{ env.REPO_NAME }}-github-action" ~/packages
           xbps-rindex --privkey ~/private.pem --sign-pkg ~/packages/*.xbps
